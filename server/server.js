@@ -54,12 +54,25 @@ app.get('/todos/:id', (req, res) => {
     }).catch((e) => {
       res.status(400).send();
     })
-  //if valid; query by id
-    //success
-      //if id send back todo
-      //if not send back empty body
-    //error
-      //send back 400 and send back empty object
+})
+
+app.delete('/todos/:id', (req, res) => {
+  //get the id
+  var id = req.params.id;
+
+  //
+  if(!ObjectID.isValid(id)){
+    return res.status(404).send()
+  }
+
+  Todo.findByIdAndRemove(id).then((todo) => {
+    if(!todo){
+      return res.status(404).send();
+    }
+    res.status(200).send(todo);
+  }, (e) => {
+    res.status(400).send({});
+  })
 })
 
 
