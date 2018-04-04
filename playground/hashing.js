@@ -8,10 +8,7 @@ var data = {
   id: 10
 }
 var token = jwt.sign(data, '123abc');
-console.log(`token: ${token}`);
 var decoded = jwt.verify(token, '123abcc');
-console.log('decoded');
-console.log(decoded);
 
 
 // var message = 'I am user number 3';
